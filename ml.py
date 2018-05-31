@@ -16,7 +16,7 @@ class RandomizeDistort():
         self.xIntersect = lambda x1,y1,y2,m: int(round((y2-y1)/m + x1))
 
         self.coef_distance = lambda s: s/self.size_y
-        self.coef_weight = lambda s: self.size_x/s
+        self.coef_weight = lambda s: s/self.size_x
 
         self.size_x, self.size_y = (sizex, sizey)
 
