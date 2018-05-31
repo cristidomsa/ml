@@ -1,4 +1,4 @@
-from random import normalvariate, vonmisesvariate
+from random import normalvariate
 from scipy.misc import imread, imsave
 
 import matplotlib.pyplot as plt
