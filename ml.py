@@ -95,7 +95,15 @@ class RandomizeDistort():
         
         for i, x in enumerate(self.x_values):
             self.y_values[i] += x/step
+
+    #TODO:
+    def _compute_coef(self):
+        pass
     
+    def _fillLine(self, x, top_px, bottom_px):
+        for y in range(bottom_px, top_px):
+            self.mask[y][x] = 0
+
     def _fillSegment(self, index):
 
         x1, x2, y1, y2 = self.x_values[index-1], \
@@ -116,10 +124,6 @@ class RandomizeDistort():
             bottom_px = self.yPoint(x3, x, y3, bottom_slope)
             self._fillLine(x, top_px, bottom_px)
 
-    def _fillLine(self, x, top_px, bottom_px):
-        for y in range(bottom_px, top_px):
-            self.mask[y][x] = 0
-
     def _fillMask(self):
         
         self.mask = np.zeros([max(self.y_values), max(self.x_values), 4], dtype=np.uint8)
@@ -132,6 +136,7 @@ class RandomizeDistort():
             
         imsave("matrix.png",self.mask)
 
+    #TODO: create generator (yield)
     def compute(self):
         self._randomizeXPoints()
         self._randomizeYPoints()
@@ -149,6 +154,22 @@ class RandomizeDistort():
         if min(self.y_values) < 0: self._normalize()
 
         self._fillMask()
+
+    def generate(self, source):
+
+        ind_x = 0
+        for i in range(0, len(self.mask[0]) - 1):
+            ind_y = 0
+            for j in range(0, len(self.mask) - 1):
+                try:
+                    if self.mask[j][i].all() == 0:
+                        self.mask[j][i] = source[ind_y][ind_x]
+                        ind_y += 1
+                except Exception:
+                    pass
+            ind_x +=1
+        
+        imsave('result.png', self.mask)
 
     def display(self, var='values'):
 
@@ -179,19 +200,6 @@ class RandomizeDistort():
         if var == 'plot':
             plt.plot(self.x_values, self.y_values, 'ro')
             plt.show()
-        
-    def generate(self, source):
-
-        # ind_x = 0
-        # for i in range(0, len(self.matrix[0]) - 1):
-        #     ind_y = 0
-        #     for j in range(0, len(self.matrix) - 1):
-        #         if self.matrix[j][i].all() == 0:
-        #             self.matrix[j][i] = source[ind_y][ind_x]
-        #             ind_y += 1
-        #     ind_x +=1
-        
-        imsave('result.png', self.mask)
 
 if __name__ == "__main__":
     
