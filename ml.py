@@ -120,7 +120,6 @@ class RandomizeDistort():
         for y in range(bottom_px, top_px):
             self.mask[y][x] = 0
 
-    #FIXME: Flip vertical fix
     def _fillMask(self):
         
         self.mask = np.zeros([max(self.y_values), max(self.x_values), 4], dtype=np.uint8)
@@ -181,9 +180,6 @@ class RandomizeDistort():
             plt.plot(self.x_values, self.y_values, 'ro')
             plt.show()
         
-        #plt.plot([x for x, _ in self.fill], [y for _, y in self.fill], 'ro')
-        #plt.savefig("test.png")
-        
     def generate(self, source):
 
         # ind_x = 0
@@ -204,5 +200,3 @@ if __name__ == "__main__":
     c = RandomizeDistort(len(bar), len(bar[0]))
     c.compute()
     c.generate(bar)
-
-    #c.display()
