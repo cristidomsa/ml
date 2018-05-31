@@ -20,7 +20,7 @@ class RandomizeDistort():
 
         self.size_x, self.size_y = (sizex, sizey)
 
-        #TODO randomize slides
+        #TODO: randomize slides
         self.slides = 10
 
         self.interval = self.size_y / self.slides
@@ -31,10 +31,10 @@ class RandomizeDistort():
         self.top_distort = ()
         self.bottom_distort = ()
 
-        #TODO randomize angle
+        #TODO: randomize angle
         self.anglepos = 0.098
 
-        #TODO randomize incline
+        #TODO: randomize incline
         self.incline = 100
 
         self.fill = []
@@ -50,7 +50,7 @@ class RandomizeDistort():
 
     def _randomizeXPoints(self):
 
-        #TODO randomize slides
+        #TODO: randomize slides
         self.x_values.extend([int(normalvariate(i/2, 100/self.slides)) for i in [100,300,500,700,900,1200,1500,1800]])
 
         self.x_values[-1] = self.size_y
@@ -72,6 +72,7 @@ class RandomizeDistort():
     
     def _randomizeDistort(self):
 
+        #TODO: randomize angles
         self.top_distort = (0,self.size_x, -0.090)
         self.bottom_distort = (0,min(self.y_values),0.020)
 
