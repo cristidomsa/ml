@@ -37,7 +37,7 @@ class RandomizeDistort():
         self.anglepos = 0.098
 
         #TODO: randomize incline
-        self.incline = 50
+        self.incline = 100
 
         self.mask = []
 
@@ -152,6 +152,10 @@ class RandomizeDistort():
         self._incline()
 
         if min(self.y_values) < 0: self._normalize()
+
+        self.display()
+        self.display('plot')
+        self.display('distort')
 
         self._fillMask()
 
